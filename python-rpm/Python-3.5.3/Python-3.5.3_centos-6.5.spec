@@ -47,14 +47,14 @@ BuildRequires: xz-devel
 BuildRequires: zlib-devel
 
 
-#Patch1: 00001-lib64.patch
+Patch1: 00001-lib64.patch
 
 %description
 Python3 for CentOS release 6.5
 
 %prep
 %setup -n %{pyname}-%{version}
-#%patch1 -p0
+%patch1 -p0
 
 %build
 %configure \
