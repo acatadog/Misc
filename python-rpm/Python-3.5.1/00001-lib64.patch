@@ -1,0 +1,23 @@
+--- Modules/Setup.dist	2015-12-06 20:39:10.000000000 -0500
++++ Modules/Setup.dist.lib64	2016-02-18 03:50:33.000000000 -0500
+@@ -95,7 +95,7 @@
+ EXTRAMACHDEPPATH=
+ 
+ COREPYTHONPATH=$(DESTPATH)$(SITEPATH)$(TESTPATH)$(MACHDEPPATH)$(EXTRAMACHDEPPATH)
+-PYTHONPATH=$(COREPYTHONPATH)
++PYTHONPATH=$(COREPYTHONPATH):$(DESTSHARED)
+ 
+ 
+ # The modules listed here can't be built as shared libraries for
+--- Modules/getpath.c   2015-12-06 20:39:10.000000000 -0500
++++ Modules/getpath.c.lib64     2016-02-20 02:19:25.000000000 -0500
+@@ -681,6 +681,9 @@
+         }
+     }
+ 
++    // phw: ignore error
++    Py_FrozenFlag = 1;
++
+     pfound = search_for_prefix(argv0_path, home, _prefix, lib_python);
+     if (!pfound) {
+         if (!Py_FrozenFlag)
