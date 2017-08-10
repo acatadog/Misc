@@ -70,7 +70,6 @@ Python3 for CentOS release 7.3
 %build
 %configure \
   --enable-shared \
-  --enable-profiling \
   --enable-loadable-sqlite-extensions \
   --enable-ipv6 \
   --with-computed-gotos=yes \
