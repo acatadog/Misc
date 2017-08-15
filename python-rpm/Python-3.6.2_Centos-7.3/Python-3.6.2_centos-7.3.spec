@@ -77,8 +77,8 @@ Python3 for CentOS release 7.3
   --with-system-expat \
   --with-system-ffi \
   --enable-loadable-sqlite-extensions \
+  --with-ensurepip \
   --enable-optimizations \
-#  --without-ensurepip \
   %{nil}
 
 make
