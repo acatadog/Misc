@@ -81,6 +81,14 @@ class TR( Tag ):
 		self.tags.append(td)
 		return td
 
+	def tds(self, *args, **kw):
+		"""
+		tr.tds("val1", "val2", ..., "valN", attr1 = xxx, attr2 = yyy)
+		"""
+		tds = [TD(v, **kw) for v in args]
+		self.tags.extend(tds)
+		return tds
+
 
 
 class Table(Tag):
@@ -95,6 +103,7 @@ class Table(Tag):
 		tr = TR(val, **kw)
 		self.tags.append(tr)
 		return tr
+	
 
 
 """
