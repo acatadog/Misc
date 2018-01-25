@@ -49,6 +49,7 @@ BuildRequires: openssl-devel
 BuildRequires: pkgconfig
 BuildRequires: readline-devel
 BuildRequires: sqlite-devel
+BuildRequires: xz-devel
 
 BuildRequires: tar
 BuildRequires: tcl-devel
