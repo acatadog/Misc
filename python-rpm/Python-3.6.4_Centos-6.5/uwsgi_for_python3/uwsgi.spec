@@ -776,7 +776,7 @@ This package contains the python plugin for uWSGI
 %package -n %{name}-plugin-python3
 Summary:  uWSGI - Plugin for Python 3 support
 Group:    System Environment/Daemons
-Requires: python%{python3_pkgversion}, %{name}-plugin-common = %{version}-%{release}
+Requires: Python%{python3_pkgversion}, %{name}-plugin-common = %{version}-%{release}
 
 %description -n %{name}-plugin-python3
 This package contains the Python 3 plugin for uWSGI
