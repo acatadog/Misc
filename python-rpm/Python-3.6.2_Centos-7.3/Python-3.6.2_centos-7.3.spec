@@ -1,6 +1,6 @@
 %define pyname Python
 %define pybasever 3.6
-%define version %{pybasever}.2
+%define version %{pybasever}.4
 %define release 1
 
 %global with_gdbm 1
@@ -61,7 +61,7 @@ BuildRequires: zlib-devel
 Patch1: 00001-lib64.patch
 
 %description
-Python3 for CentOS release 7.3
+Python3 for CentOS release 7.5
 
 %prep
 %setup -n %{pyname}-%{version}
