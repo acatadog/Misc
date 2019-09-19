@@ -27,7 +27,8 @@ Release: 58%{?dist}
 # We have to remove certain patented algorithms from the openssl source
 # tarball with the hobble-openssl script which is included below.
 # The original openssl upstream tarball cannot be shipped in the .src.rpm.
-Source: openssl-%{version}-phw.tar.gz
+Source: openssl-%{version}.tar.gz
+Source1: hobble-openssl
 Source2: Makefile.certificate
 Source5: README.legacy-settings
 Source6: make-dummy-cert
@@ -36,12 +37,20 @@ Source8: openssl-thread-test.c
 Source9: opensslconf-new.h
 Source10: opensslconf-new-warning.h
 Source11: README.FIPS
+Source12: ec_curve.c
+Source13: ectest.c
 
 # Build changes
-Patch2: openssl-1.0.1t-defaults.patch
+Patch1: openssl-1.0.2t-rpmbuild.patch
+Patch2: openssl-1.0.2t-defaults.patch
+Patch4: openssl-1.0.2t-enginesdir.patch
+Patch7: openssl-1.0.2t-timezone.patch
+Patch8: openssl-1.0.1c-perlfind.patch
 
 # Functionality changes
 Patch33: openssl-1.0.0-beta4-ca-dir.patch
+Patch35: openssl-1.0.2t-version-add-engines.patch
+Patch51: openssl-1.0.2t-version.patch
 
 
 License: OpenSSL
@@ -95,7 +104,20 @@ from other formats to the formats used by the OpenSSL toolkit.
 %prep
 %setup -q -n %{name}-%{version}
 
+# The hobble_openssl is called here redundantly, just to be sure.
+# The tarball has already the sources removed.
+#%{SOURCE1} > /dev/null
+
+#cp %{SOURCE12} %{SOURCE13} crypto/ec/
+
+%patch1 -p1 -b .rpmbuild
 %patch2 -p1 -b .defaults
+%patch4 -p1 -b .enginesdir %{?_rawbuild}
+%patch7 -p1 -b .timezone
+%patch8 -p1 -b .perlfind %{?_rawbuild}
+
+%patch35 -p1 -b .version-add-engines
+%patch51 -p1 -b .version
 
 sed -i 's/SHLIB_VERSION_NUMBER "1.0.0"/SHLIB_VERSION_NUMBER "%{version}"/' crypto/opensslv.h
 
