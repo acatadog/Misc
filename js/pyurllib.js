@@ -4,8 +4,8 @@
  */
 
 pyurllib = {
-    parse = {
-        urlencode = function (a) {
+    parse: {
+        urlencode: function (a) {
             var s = [];
 
             if ( a.constructor == Array ) {
@@ -18,7 +18,7 @@ pyurllib = {
             return s.join("&");
         },
 
-        urlparse = function (url) {
+        urlparse: function (url) {
             var obj = { 
                 protocol : '' ,  /* http */
                 auth : null,
@@ -32,7 +32,7 @@ pyurllib = {
                 pathname : '',  /* /one */
                 path : '',  /* /one?a=index&t=article */
                 href : url  /* http://localhost:8080/one?a=index&t=article */
-            }
+            };
 
             var reg = /((file|gopher|news|nntp|telnet|http|ftp|https|ftps|sftp):\/\/(.+?)(:\d+)*?)(\/.*)/;
             var r = reg.exec(url) || reg.exec(url + "/");
@@ -70,7 +70,7 @@ pyurllib = {
             return obj;
         },
 
-        urljoin = function (base, url) {
+        urljoin: function (base, url) {
             var urlO = this.urlparse(url);
             if (urlO.protocol) {
                 return url;
