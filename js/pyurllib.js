@@ -79,7 +79,7 @@ pyurllib = {
             var baseO = this.urlparse(base);
             var paths = [];
 
-            if (!urlO.pathname.startsWith("/")) {
+            if (!urlO.pathname[0] == "/") {
                 /* like as ["a", "b", "c", "d", ""] */
                 basePath = baseO.pathname.split("/");
                 /* drop last element */
