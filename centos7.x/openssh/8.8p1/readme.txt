@@ -1,0 +1,26 @@
+解决openssh8.8p1包升级的问题：
+1.高版本的ssh连接低版本的sshd时报错：Unable to negotiate with xxx.xxx.xxx.xxx port 22: no matching host key type found. Their offer: ssh-rsa,ssh-dss
+  解决方案：修改高版本的openssh配置文件：/etc/ssh/ssh_config，在文件最后面加上一行：HostKeyAlgorithms +ssh-rsa,ssh-dss
+
+2.低版本的ssh连接高版本的sshd服务时报错：no hostkey alg
+  解决方案：修改高版本的openssh配置文件：/etc/ssh/sshd_config，在文件最后面加上一行：HostKeyAlgorithms +ssh-rsa,ssh-dss，然后重启sshd服务
+
+3.某些转发登录功能可能还需要修改“/etc/ssh/sshd_config”，加上“PubkeyAcceptedAlgorithms +ssh-rsa,ssh-dss”才可转发登录。
+
+
+禁止SHA-1算法
+现版本中，直接默认禁用使用SHA-1哈希算法的RSA签名。由于SHA-1哈希算法已经在密码学上被碰撞破坏（可以以少于5万美刀的成本创建前缀哈希冲突。）。
+
+对于大多数用户来说，这种变化应该是不可见的，不需要替换ssh-rsa密钥。OpenSSH 7.2 版以后，OpenSSH就已支持 RFC8332 RSA/SHA-256/512 签名，现有的ssh-rsa密钥将在可能的情况下自动使用更强的算法。
+
+当连接到尚未升级或没有密切跟踪SSH协议改进的旧版本时，可能会由于不兼容导致连接失败。对于这些情况，可能手动配置HostkeyAlgorithms 和 PubkeyAcceptedAlgorithms 选项启用 RSA/SHA1进行连接和用户身份验证。
+
+可以在在用户ssh配置文件~/.ssh/config 中的以下对单台目标主机启用 RSA/SHA1：
+
+Host Chongchong
+
+HostkeyAlgorithms +ssh-rsa
+
+PubkeyAcceptedAlgorithms +ssh-rsa
+
+建议尽在特殊情况下暂时启用 RSA/SHA1，对出现该问题的主机尽快升级版本或者更换证书类型，比如可以使用ECDSA 或 Ed25519。
