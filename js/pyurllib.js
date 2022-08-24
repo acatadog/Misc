@@ -34,7 +34,7 @@ pyurllib = {
                 href : url  /* http://localhost:8080/one?a=index&t=article */
             };
 
-            var reg = /((file|gopher|news|nntp|telnet|http|ftp|https|ftps|sftp):\/\/(.+?)(:\d+)*?)(\/.*)/;
+            var reg = /(^(file|gopher|news|nntp|telnet|http|ftp|https|ftps|sftp):\/\/(.+?)(:\d+)*?)(\/.*)/;
             var r = reg.exec(url) || reg.exec(url + "/");
             if (r) {
                 if (r[1] != undefined) {
