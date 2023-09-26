@@ -89,9 +89,9 @@ pyurllib = {
             paths.push(urlO.pathname.split("/"));
 
             var allPaths = [];
-            for (var j in paths) {
+            for (var j = 0; j < paths.length; j++) {
                 var pathE = paths[j];
-                for (var i in pathE) {
+                for (var i = 0; i < pathE.length; i++) {
                     var val = pathE[i];
                     if (!val || val == ".") {
                         continue;
